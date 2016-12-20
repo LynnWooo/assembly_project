@@ -9,20 +9,39 @@ START:
 
 	;print first line
 	;set time of loop & first letter
-	mov cx,26
+	mov cx,16
 	mov dl,'a'
+	;print a letter & blank space in each loop
 	s:
 	mov ah,2
-	;mov dl,'a'
-	;mov cx,1
 	int 21h
 	inc dl
 	mov bx,dx
 	mov dl,' '
 	int 21h
 	mov dx,bx
-	;int 21h
 	loop s
+	
+	;change line
+	mov dl,10
+	int 21h
+	mov dl,13
+	int 21h
+	
+	;print 2nd line
+	mov cx,10
+	mov dl,'a'+16
+	;print a letter & blank space in each loop
+	s2:
+	mov ah,2
+	int 21h
+	inc dl
+	mov bx,dx
+	mov dl,' '
+	int 21h
+	mov dx,bx
+	loop s2
+	
 	;‘›Õ£,»Œ“‚º¸πÿ±’
 	mov ah,1
 	int 21h
