@@ -13,15 +13,15 @@
 					db 8,16,24,32,40,48,56,7,72 
 					db 9,18,27,36,45,54,63,72,81
 	
-	corr_table	db 1,2,3,4,5,6,7,8,9
-					db 2,4,6,8,10,12,14,16,18
-					db 3,6,9,12,15,18,21,24,27 
-					db 4,8,12,16,20,24,28,32,36 
-					db 5,10,15,20,25,30,35,40,45 
-					db 6,12,18,24,30,36,42,48,54 
-					db 7,14,21,28,35,42,49,56,63 
-					db 8,16,24,32,40,48,56,64,72 
-					db 9,18,27,36,45,54,63,72,81	
+	;corr_table	db 1,2,3,4,5,6,7,8,9
+	;				db 2,4,6,8,10,12,14,16,18
+	;				db 3,6,9,12,15,18,21,24,27 
+	;				db 4,8,12,16,20,24,28,32,36 
+	;				db 5,10,15,20,25,30,35,40,45 
+	;				db 6,12,18,24,30,36,42,48,54 
+	;				db 7,14,21,28,35,42,49,56,63 
+	;				db 8,16,24,32,40,48,56,64,72 
+	;				db 9,18,27,36,45,54,63,72,81	
 	
 	;debug_number	db "00	$"
 	headline		db "x y",10,13,'$'		
@@ -61,11 +61,16 @@ START:
 		add al,bl
 		mov bx,0
 		mov bl,al
-		;get user value and correct value
+		;calculate correct answer,save in dx
+		mov ax,si
+		mov dx,di
+		add al,1
+		add dl,1
+		mul dl
+		mov dx,ax
+		;get user value
 		mov al,usr_table[bx]
 		mov bp,ax
-		mov al,corr_table[bx]
-		mov dx,ax
 		cmp bp,dx
 		;do not print anything if they are equal
 		je next
